@@ -28,14 +28,22 @@ Resources:
       Name: !Sub '${AppName}'
       ApiKeySourceType: HEADER
 
-  MusicResource:
+  ProductsResource:
     Type: 'AWS::ApiGateway::Resource'
+    Properties:
+      RestApiId: !Ref ProductsApi
+      ParentId: !GetAtt ProductsApi.RootResourceId
+      PathPart: 'products'
+  
+  ProductResource:
+    Type: 'AWS::ApiGateway::Resource'
+    Properties:
+      RestApiId: !Ref ProductsApi
+      ParentId: !Ref ProductsResource
+      PathPart: '{PK}'
 
   MusicMethodPost:
     Type: 'AWS::ApiGateway::Method'
-
-  MusicArtistResource:
-    Type: 'AWS::ApiGateway::Resource'
   
   MusicArtistMethodGet:
     Type: 'AWS::ApiGateway::Method'

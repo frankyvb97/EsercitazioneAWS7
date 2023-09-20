@@ -1,0 +1,10 @@
+openapi: 3.0.1
+info:
+  title: ProductsAPI
+  version: 1.0.0
+  "x-amazon-apigateway-integration": 
+    type: "aws"
+    httpMethod: "POST"
+    responses:
+      200: 
+        - statusCode: "200"

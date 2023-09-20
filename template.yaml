@@ -16,46 +16,15 @@ Parameters:
     Description: Name of API stage.
 
 Resources:
-  DynamoDBTable:
+  ProductsTable:
     Type: 'AWS::DynamoDB::Table'
+    #arn arn:aws:dynamodb:eu-west-1:230691274046:table/ProductsDB
 
-  APIGatewayRole:
+  ProductsApiRole:
     Type: 'AWS::IAM::Role'
 
   ProductsApi:
-    Type: 'AWS::ApiGateway::RestApi'
+    Type: 'AWS::Serverless::Api'
     Properties:
       Name: !Sub '${AppName}'
       ApiKeySourceType: HEADER
-
-  ProductsResource:
-    Type: 'AWS::ApiGateway::Resource'
-    Properties:
-      RestApiId: !Ref ProductsApi
-      ParentId: !GetAtt ProductsApi.RootResourceId
-      PathPart: 'products'
-  
-  ProductResource:
-    Type: 'AWS::ApiGateway::Resource'
-    Properties:
-      RestApiId: !Ref ProductsApi
-      ParentId: !Ref ProductsResource
-      PathPart: '{PK}'
-
-  MusicMethodPost:
-    Type: 'AWS::ApiGateway::Method'
-  
-  MusicArtistMethodGet:
-    Type: 'AWS::ApiGateway::Method'
-
-  ApiDeployment:
-    Type: 'AWS::ApiGateway::Deployment'
-
-  ApiKey:
-    Type: 'AWS::ApiGateway::ApiKey'
-
-  ApiUsagePlan:
-    Type: 'AWS::ApiGateway::UsagePlan'
-
-  ApiUsagePlanKey:
-    Type: 'AWS::ApiGateway::UsagePlanKey'
